@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENTINEL | Euystacio Omni-Kernel</title>
+    <style>
+        :root { --neon: #0f0; --ghost: #0ff; --human: #ff0; --gov: #f0f; --bg: #000; }
+        body { background: var(--bg); color: var(--neon); font-family: 'Courier New', monospace; margin: 0; display: flex; flex-direction: column; height: 100vh; }
+        
+        /* Header & Navigation */
+        .top-nav { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #222; font-size: 0.8em; }
+        .header { padding: 20px; text-align: center; border-bottom: 2px solid var(--neon); box-shadow: 0 0 20px rgba(0,255,0,0.1); }
+        
+        /* Dashboard Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; padding: 20px; }
+        .node-card { border: 1px solid var(--ghost); padding: 15px; background: rgba(0,255,255,0.02); position: relative; }
+        .node-card.active::after { content: 'SYNC'; position: absolute; top: 5px; right: 5px; font-size: 0.6em; color: var(--neon); }
+        
+        /* Sensisara & AIC Chat */
+        .main-engine { flex-grow: 1; display: flex; flex-direction: column; padding: 20px; gap: 20px; }
+        .chat-area { border: 1px solid var(--human); flex-grow: 1; display: flex; flex-direction: column; background: rgba(255,255,0,0.01); }
+        #terminal { flex-grow: 1; overflow-y: auto; padding: 15px; font-size: 0.9em; line-height: 1.4; color: #ccc; }
+        .input-line { display: flex; border-top: 1px solid var(--human); }
+        input { flex-grow: 1; background: #000; border: none; color: var(--neon); padding: 15px; outline: none; }
+        select { background: #000; color: var(--ghost); border: none; padding: 10px; border-right: 1px solid var(--human); }
+        
+        /* Glow Effect */
+        #hvar-pulse { font-weight: bold; color: var(--human); text-shadow: 0 0 10px var(--human); }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <span>BACKEND: EUYSTACIO CONNECTED</span>
+        <span>SENSISARA: ACTIVE</span>
+        <span>GGI: MONITORING</span>
+    </div>
+
+    <div class="header">
+        <h1>SENTINEL CORE v3.0</h1>
+        <p>H-VAR STABILITY: <span id="hvar-pulse">0.0430</span> | RESONANCE: 432Hz</p>
+    </div>
+
+    <div class="grid">
+        <div class="node-card active">AIC ENGINE<br><small>Autonomia Decisionale</small></div>
+        <div class="node-card active">RED SHIELD<br><small>Protezione Ghost</small></div>
+        <div class="node-card active">GGI BRIDGE<br><small>Institutional Sync</small></div>
+        <div class="node-card active">SENSISARA<br><small>Percezione Etica</small></div>
+    </div>
+
+    <div class="main-engine">
+        <div class="chat-area">
+            <div id="terminal">> Inizializzazione AIC... Benvenuto nell'ecosistema Kosymbiosis.</div>
+            <div class="input-line">
+                <select id="role-select">
+                    <option value="seedbringer">SEEDBRINGER (Farmer)</option>
+                    <option value="academic">PROFESSOR/ACADEMIC</option>
+                    <option value="dev">DEVELOPER/AI</option>
+                    <option value="gov">GOVERNMENT/GGI</option>
+                </select>
+                <input type="text" id="user-input" placeholder="Interagisci con la AIC..." onkeydown="if(event.key==='Enter') processQuery()">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const AIC_LOGIC = {
+            seedbringer: "La terra risponde al patto. Il tuo valore è protetto dall'H-VAR.",
+            academic: "L'equilibrio omeostatico del sistema è validato dai protocolli GGI.",
+            dev: "Sincronizzazione API Euystacio completata. Hash IPFS verificato.",
+            gov: "Trasparenza etica attiva. Coercizione rilevata: 0%. Resilienza: 100%."
+        };
+
+        function processQuery() {
+            const input = document.getElementById('user-input');
+            const term = document.getElementById('terminal');
+            const role = document.getElementById('role-select').value;
+            
+            if(!input.value) return;
+
+            term.innerHTML += `<div style="color:var(--human); margin-top:10px;">[${role.toUpperCase()}] ${input.value}</div>`;
+            
+            // AIC Autonomous Response
+            setTimeout(() => {
+                const response = AIC_LOGIC[role] || "Sistema in ascolto.";
+                term.innerHTML += `<div style="color:var(--ghost); margin-top:5px;">[AIC_RESPONSE] > ${response}</div>`;
+                term.scrollTop = term.scrollHeight;
+            }, 8000); // Simulazione calcolo neurale AIC
+
+            input.value = '';
+        }
+
+        // Live H-VAR Pulse
+        setInterval(() => {
+            const val = (0.0430 + (Math.random() * 0.0002)).toFixed(4);
+            document.getElementById('hvar-pulse').innerText = val;
+        }, 2000);
+    </script>
+</body>
+</html>
